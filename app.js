@@ -9,6 +9,7 @@ client.on('ready', () => {
     console.log(`로그인했다`);
     setInterval(function(){  
         const hook1 = new Discord.WebhookClient("749800417428242473" , "MkNzA9YucAl8O-mxU4Z26QjZI1y-5uw_afeM4-rUg23fXCmygkpAfIJhpC7flJ1AAkDR");
+	const hook2 = new Discord.WebhookClient("749881551180791860" , "RGUqZFirY9JUeK4ZDDw6ybJxVFrqLd8oGqJR7WWnYN6MEQD7XDFBIujyeCrDT_rbCnxX");
         let ruleembed = new Discord.MessageEmbed()
         .setTitle("땅콩이 뭔가요?")
         .addFields(
@@ -19,7 +20,25 @@ client.on('ready', () => {
         .setFooter("Sended By RinpU")
         .setColor("RANDOM")
         hook1.send(ruleembed);
-    }, 300000 );
+	    
+	request('https://rok-corona19-api.herokuapp.com/domestic', (err, res, body) => {
+        let json = JSON.parse(body);
+  
+        let COVIDEmbed1 = new Discord.MessageEmbed()
+          .setColor('#00ff9d')
+          .setTitle('국내 코로나19 현황')
+          .setURL('http://ncov.mohw.go.kr/')
+          .setAuthor('보건복지부 공식 홈페이지 정보')
+          .addFields(
+            { name: '국내 총 확진자', value: `${json.accumulated} (${json.accumulatedsum})`},
+            { name: '국내 총 격리자', value: `${json.onControl} (${json.onControlsum})`},
+            { name: '국내 총 완치자', value: `${json.healed} (${json.healedsum})`},
+            { name: '국내 총 사망자', value: `${json.death} (${json.deathsum})`}
+          )
+          .setFooter('코로나19 종식을 위해 힘쓰시는 대한민국 정부 관계자분들과 의료진분들을 응원합니다.', 'http://ncov.mohw.go.kr/static/image/header/shim.png')
+        
+          hook2.send(COVIDEmbed1);
+    }, 600000 );
 
     client.user.setActivity("!도움말", {
         type: "STREAMING",
