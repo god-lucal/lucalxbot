@@ -6,22 +6,21 @@ const fs = require('fs');
 const path = require('path');
 
 client.on('ready', () => {
-    console.log(`로그인했다`);
-    setInterval(function(){  
-        const hook1 = new Discord.WebhookClient("749800417428242473" , "MkNzA9YucAl8O-mxU4Z26QjZI1y-5uw_afeM4-rUg23fXCmygkpAfIJhpC7flJ1AAkDR");
-	const hook2 = new Discord.WebhookClient("749881551180791860" , "RGUqZFirY9JUeK4ZDDw6ybJxVFrqLd8oGqJR7WWnYN6MEQD7XDFBIujyeCrDT_rbCnxX");
-        let ruleembed = new Discord.MessageEmbed()
-        .setTitle("땅콩이 뭔가요?")
-        .addFields(
-            { name: '땅콩 3개', value: '↑ 이 경우 슬로우모드가 주어집니다!' },
-            { name: '땅콩 5개', value: '↑ 이 경우 5 일간 킥됩니다!' },
-            { name: '땅콩 10개', value: '↑ 이 경우 영구 밴입니다!' },
-        )
-        .setFooter("Sended By RinpU")
-        .setColor("RANDOM")
-        hook1.send(ruleembed);
-	    
-	request('https://rok-corona19-api.herokuapp.com/domestic', (err, res, body) => {
+  console.log(`로그인했다`);
+  setInterval(function(){  
+      const hook1 = new Discord.WebhookClient("749800417428242473" , "MkNzA9YucAl8O-mxU4Z26QjZI1y-5uw_afeM4-rUg23fXCmygkpAfIJhpC7flJ1AAkDR");
+      const hook2 = new Discord.WebhookClient("749881551180791860" , "RGUqZFirY9JUeK4ZDDw6ybJxVFrqLd8oGqJR7WWnYN6MEQD7XDFBIujyeCrDT_rbCnxX");
+      let ruleembed = new Discord.MessageEmbed()
+      .setTitle("땅콩이 뭔가요?")
+      .addFields(
+          { name: '땅콩 3개', value: '↑ 이 경우 슬로우모드가 주어집니다!' },
+          { name: '땅콩 5개', value: '↑ 이 경우 5 일간 킥됩니다!' },
+          { name: '땅콩 10개', value: '↑ 이 경우 영구 밴입니다!' },
+      )
+      .setFooter("Sended By RinpU")
+      .setColor("RANDOM")
+      hook1.send(ruleembed);
+      request('https://rok-corona19-api.herokuapp.com/domestic', (err, res, body) => {
         let json = JSON.parse(body);
   
         let COVIDEmbed1 = new Discord.MessageEmbed()
@@ -38,13 +37,13 @@ client.on('ready', () => {
           .setFooter('코로나19 종식을 위해 힘쓰시는 대한민국 정부 관계자분들과 의료진분들을 응원합니다.', 'http://ncov.mohw.go.kr/static/image/header/shim.png')
         
           hook2.send(COVIDEmbed1);
-    }, 600000 );
+  }, 600000 );
 
-    client.user.setActivity("!도움말", {
-        type: "STREAMING",
-        url: "https://www.twitch.tv/RGBbot"
-      });
-  });
+  client.user.setActivity("!도움말", {
+      type: "STREAMING",
+      url: "https://www.twitch.tv/RGBbot"
+    });
+});
 
 client.on('message', msg => {
     if (msg.content === '!필수맵') {
@@ -225,21 +224,6 @@ client.on("message", msg => {
         .setColor("YELLOW")
         hook.send(badembed);
 }});
-
-client.on("message" , msg =>{
-    let args = msg.content.trim().split(" ").slice(1);
-    if (msg.content.startsWith == ".clear") {
-        if (!msg.member.hasPermission('MANAGE_MESSAGES')) return msg.channel.send("**권한이 부족합니다**");
-        if (!args[0]) return msg.channel.send("지울 메세지의 수를 입력해주세요");
-        if (isNan(args[0])) return msg.channel.send("숫자만 입력해주세요");
-        if (parseInt(args[0]) <= 0 || parseInt(args[0]) >= 99) return msg.channel.send("1~99 까지의 숫자만 입력해주세요")
-        msg.channel.bulkDelete(parseInt(args[0]) + 1)
-        msg.channel.send(`${args[1]} 개의 메세지를 삭제함`).then(msg => {
-            setTimeout(() => {
-                msg.delete()
-            }, 5000);
-        });
-    }
 })
 
 client.login(process.env.TOKEN);
