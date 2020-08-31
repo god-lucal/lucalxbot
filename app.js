@@ -6,22 +6,7 @@ const fs = require('fs');
 const path = require('path');
 
 client.on('ready', () => {
-  console.log(`로그인했다`);
-  setInterval(function(){  
-      const hook1 = new Discord.WebhookClient("749800417428242473" , "MkNzA9YucAl8O-mxU4Z26QjZI1y-5uw_afeM4-rUg23fXCmygkpAfIJhpC7flJ1AAkDR");
-
-      let ruleembed = new Discord.MessageEmbed()
-      .setTitle("땅콩이 뭔가요?")
-      .addFields(
-          { name: '땅콩 3개', value: '↑ 이 경우 슬로우모드가 주어집니다!' },
-          { name: '땅콩 5개', value: '↑ 이 경우 5 일간 킥됩니다!' },
-          { name: '땅콩 10개', value: '↑ 이 경우 영구 밴입니다!' },
-      )
-      .setFooter("Sended By RinpU")
-      .setColor("RANDOM")
-      hook1.send(ruleembed);
-  }, 600000 );
-
+  console.log(`로그인했다`); 
   client.user.setActivity("!도움말", {
       type: "STREAMING",
       url: "https://www.twitch.tv/RGBbot"
@@ -188,25 +173,5 @@ client.on('message', msg => {
         });
     }
   });
-
-
-client.on("message", msg => {
-    //Here you can put banned words and swearwords in the quotation marks "here"
-    const swearWords = ["씨발", "새끼", "시밭", "병신", "씨밭" , "시발" , "ㅗ"];
-    if( swearWords.some(word => msg.content.includes(word)) ) {
-        let badguy = msg.author.username;
-        let abad = msg.author.discriminator;
-        let badwords = msg.content;
-        msg.delete();
-        msg.delete();
-        const hook = new Discord.WebhookClient('749793060560306197', 'cHJPsyKodscwWmR5MB6Xo-dNEKvdBvHaelklA13XUxR0zZkqEpVIPdNj3S5uWcUZPf7H');
-        let badembed = new Discord.MessageEmbed()
-        .setTitle(badguy + "#" +abad + " 가 욕함")
-        .setDescription(badwords)
-        .setFooter(badguy + " 는 인성이 정말 바르군요?")
-        .setColor("YELLOW")
-        hook.send(badembed);
-}});
-})
 
 client.login(process.env.TOKEN);
