@@ -14,20 +14,6 @@ client.on('ready', () => {
 });
 
 client.on('message', msg => {
-      if (msg.startsWith("rshop")) {
-    let channel = client.channels.cache.get("750318311937540157"); // We want to sent the embed, directly to this channel.
-    const embedr = new Discord.MessageEmbed()
-    .setColor(0xffffff)
-    .setTitle("린프_계정_판매소에_입장하시려면_반응하세요")
-    // We're gonna try an unicode emoji. Let's find it on emojipedia.com !
-    channel.send(embedr).then(async msg => {
-      await msg.react("✅");
-      // We're gonna using an await, to make the react are right in order.
-    })
-  }
-});
-
-client.on('message', msg => {
     if (msg.content === '!선택맵') {
         const embed1 = new MessageEmbed()
         .setColor(`40FF00`)
