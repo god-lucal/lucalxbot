@@ -14,19 +14,17 @@ client.on('ready', () => {
 });
 
 client.on('message', msg => {
-    if (msg.content === '!필수맵') {
-        const embed = new MessageEmbed()
-        .setColor(`40FF00`)
-        .setTitle("이 맵들은 필수 맵들 입니다!")
-        .addFields(
-            { name: '빌리지 고가의 질주', value: '1군 : 1:52:99 / 2군 : 1:56:99' },
-            { name: '비치 해변 드라이브', value: '1군 : 2:06:01 / 2군 : 2:10:07' },
-        )
-        .setAuthor(`Succesfully Sended`)
-        .setTimestamp()
-        msg.reply(embed);
-        
-    }
+      if (msg.startsWith("rshop")) {
+    let channel = client.channels.cache.get("750318311937540157"); // We want to sent the embed, directly to this channel.
+    const embedr = new Discord.MessageEmbed()
+    .setColor(0xffffff)
+    .setTitle("린프_계정_판매소에_입장하시려면_반응하세요")
+    // We're gonna try an unicode emoji. Let's find it on emojipedia.com !
+    channel.send(embedr).then(async msg => {
+      await msg.react("✅");
+      // We're gonna using an await, to make the react are right in order.
+    })
+  }
 });
 
 client.on('message', msg => {
