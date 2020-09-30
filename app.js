@@ -7,10 +7,6 @@ const path = require('path');
 
 client.on('ready', () => {
   console.log(`로그인했다`); 
-  client.user.setActivity("NEW PURE", {
-      type: "STREAMING",
-      url: "https://www.twitch.tv/RGBbot"
-    });
 });
 
 client.on('message', msg => {
